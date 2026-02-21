@@ -50,6 +50,15 @@ specs/
 │   ├── selector-strategy.md
 │   ├── api-mocking-e2e.md
 │   └── user-flow-testing.md
+├── java-springboot-jpa/ # Java Spring Boot JPA specs
+│   ├── README.md
+│   ├── architecture-design.md
+│   ├── entities.md
+│   ├── repositories.md
+│   ├── services.md
+│   ├── dtos.md
+│   ├── rest-controllers.md
+│   └── response-handling.md
 └── {technology}/         # Additional tech stacks
     └── README.md
 ```
@@ -90,6 +99,15 @@ specs/
 - [Selector Strategy](playwright-e2e-testing/selector-strategy.md)
 - [API Mocking for E2E](playwright-e2e-testing/api-mocking-e2e.md)
 - [User Flow Testing](playwright-e2e-testing/user-flow-testing.md)
+
+### Java Spring Boot JPA
+- [Architecture Design](java-springboot-jpa/architecture-design.md)
+- [Entities](java-springboot-jpa/entities.md)
+- [Repositories](java-springboot-jpa/repositories.md)
+- [Services](java-springboot-jpa/services.md)
+- [DTOs](java-springboot-jpa/dtos.md)
+- [REST Controllers](java-springboot-jpa/rest-controllers.md)
+- [Response Handling](java-springboot-jpa/response-handling.md)
 
 ## Adding New Specs
 
