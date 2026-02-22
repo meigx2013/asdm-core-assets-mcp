@@ -2,6 +2,11 @@ name: ASDM Workspace Execution
 
 on:
   workflow_dispatch:
+    inputs:
+      prompt-text:
+        description: 'Prompt text for CodeBuddy'
+        required: true
+        default: ''
 
 env:
   ACTIONS_STEP_DEBUG: true
@@ -26,7 +31,7 @@ jobs:
         run: |
           npm install -g @tencent-ai/codebuddy-code
           codebuddy --version
-          codebuddy -p "对当前工作区进行总结" -y --verbose
+          codebuddy -p "${{ inputs.prompt-text }}" -y --verbose --output-format stream-json
 
       - name: Collect results
         if: always()
