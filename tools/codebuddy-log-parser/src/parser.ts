@@ -9,6 +9,13 @@ import {
   AssistantEntry,
   UserEntry,
   ResultEntry,
+  ErrorEntry,
+  ProgressEntry,
+  PermissionRequestEntry,
+  ThinkingEntry,
+  ToolCallEntry,
+  GenericEntry,
+  LogType,
 } from './types';
 
 // Regex to match log line format: TIMESTAMP JSON (CodeBuddy format)
@@ -20,7 +27,7 @@ const GHA_LOG_REGEX = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d+Z\s+(.+)$/;
 // Regex to detect JSON object start
 const JSON_START_REGEX = /^\s*\{/;
 
-export function parseLogLine(line: string, silent: boolean = false): ParsedLogEntry | null {
+export function parseLogLine(line: string, silent: boolean = true): ParsedLogEntry | null {
   const trimmed = line.trim();
   if (!trimmed) return null;
 
@@ -42,9 +49,6 @@ export function parseLogLine(line: string, silent: boolean = false): ParsedLogEn
       jsonStr = match[1];
       rawTimestamp = undefined;
     } else {
-      if (!silent) {
-        // Skip non-JSON lines silently in stream mode
-      }
       return null;
     }
   }
@@ -52,10 +56,7 @@ export function parseLogLine(line: string, silent: boolean = false): ParsedLogEn
   let json: Record<string, unknown>;
   try {
     json = JSON.parse(jsonStr);
-  } catch (e) {
-    if (!silent) {
-      // Invalid JSON, skip
-    }
+  } catch {
     return null;
   }
 
@@ -74,6 +75,8 @@ export function parseLogLine(line: string, silent: boolean = false): ParsedLogEn
     subtype: json.subtype as string | undefined,
     uuid: json.uuid as string,
     session_id: json.session_id as string,
+    _requestId: json._requestId as string,
+    __timestamp: json.__timestamp as string,
     ...json,
   };
 
@@ -81,29 +84,55 @@ export function parseLogLine(line: string, silent: boolean = false): ParsedLogEn
 }
 
 function parseTypedEntry(base: LogEntry, json: Record<string, unknown>): ParsedLogEntry {
-  // Map the JSON timestamp to snapshotTimestamp for file-history-snapshot
-  if (base.type === 'file-history-snapshot') {
-    (base as FileHistoryEntry).snapshotTimestamp = json.timestamp as number;
-  }
-  
-  switch (base.type) {
-    case 'system':
-      return base as SystemInitEntry;
-    case 'file-history-snapshot':
-      return base as FileHistoryEntry;
-    case 'assistant':
+  const type = base.type;
+
+  switch (type) {
+    case LogType.SYSTEM:
+      return parseSystemEntry(base, json);
+    case LogType.FILE_HISTORY:
+      return parseFileHistoryEntry(base, json);
+    case LogType.ASSISTANT:
       return base as AssistantEntry;
-    case 'user':
+    case LogType.USER:
       return base as UserEntry;
-    case 'result':
-      return base as ResultEntry;
+    case LogType.RESULT:
+      return parseResultEntry(base, json);
+    case LogType.ERROR:
+      return base as ErrorEntry;
+    case LogType.PROGRESS:
+      return base as ProgressEntry;
+    case LogType.PERMISSION_REQUEST:
+      return base as PermissionRequestEntry;
+    case LogType.THINKING:
+      return base as ThinkingEntry;
+    case LogType.TOOL_CALL:
+      return base as ToolCallEntry;
     default:
-      return base as ParsedLogEntry;
+      return base as GenericEntry;
   }
 }
 
+function parseSystemEntry(base: LogEntry, json: Record<string, unknown>): SystemInitEntry {
+  const entry = base as SystemInitEntry;
+  entry.mcp_servers = (json.mcp_servers as SystemInitEntry['mcp_servers']) || [];
+  entry.slash_commands = (json.slash_commands as string[]) || [];
+  entry.output_style = (json.output_style as string) || 'default';
+  return entry;
+}
+
+function parseFileHistoryEntry(base: LogEntry, json: Record<string, unknown>): FileHistoryEntry {
+  const entry = base as FileHistoryEntry;
+  entry.snapshotTimestamp = json.timestamp as number;
+  return entry;
+}
+
+function parseResultEntry(base: LogEntry, json: Record<string, unknown>): ResultEntry {
+  const entry = base as ResultEntry;
+  entry.permission_denials = (json.permission_denials as ResultEntry['permission_denials']) || [];
+  return entry;
+}
+
 function formatTimestamp(isoTimestamp: string): string {
-  // Convert ISO timestamp to local time format
   try {
     const date = new Date(isoTimestamp);
     return date.toLocaleString('zh-CN', {
@@ -123,32 +152,49 @@ function formatTimestamp(isoTimestamp: string): string {
 export function parseLogFile(content: string): ParsedLog {
   const lines = content.split('\n');
   const entries: ParsedLogEntry[] = [];
+  const errors: ErrorEntry[] = [];
   let sessionInfo: ParsedLog['sessionInfo'];
   let result: ResultEntry | undefined;
 
   for (const line of lines) {
-    // Use silent mode for batch parsing
     const entry = parseLogLine(line, true);
     if (!entry) continue;
 
     entries.push(entry);
 
     // Extract session info from init entry
-    if (entry.type === 'system' && entry.subtype === 'init') {
+    if (entry.type === LogType.SYSTEM && entry.subtype === 'init') {
       const initEntry = entry as SystemInitEntry;
       sessionInfo = {
         sessionId: initEntry.session_id,
         model: initEntry.model,
         cwd: initEntry.cwd,
         startTime: entry.timestamp,
+        tools: initEntry.tools,
+        mcpServers: initEntry.mcp_servers,
       };
     }
 
     // Capture result entry
-    if (entry.type === 'result') {
+    if (entry.type === LogType.RESULT) {
       result = entry as ResultEntry;
+    }
+
+    // Collect error entries
+    if (entry.type === LogType.ERROR) {
+      errors.push(entry as ErrorEntry);
     }
   }
 
-  return { entries, sessionInfo, result };
+  return { entries, sessionInfo, result, errors };
+}
+
+// Utility function to check if entry is of a specific type
+export function isEntryType<T extends ParsedLogEntry>(entry: ParsedLogEntry, type: string): entry is T {
+  return entry.type === type;
+}
+
+// Get all entries of a specific type
+export function getEntriesByType<T extends ParsedLogEntry>(log: ParsedLog, type: string): T[] {
+  return log.entries.filter((entry): entry is T => entry.type === type);
 }

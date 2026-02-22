@@ -101,7 +101,7 @@ function formatSingleEntry(line: string, format: string, colorize: boolean): str
   if (entry.type === 'result') return null;
 
   const options: FormatterOptions = { colorize, verbose: false };
-  const tempLog = { entries: [entry], sessionInfo: undefined, result: undefined };
+  const tempLog = { entries: [entry], sessionInfo: undefined, result: undefined, errors: [] };
 
   if (format === 'human-chat') {
     return formatHumanChat(tempLog, options);
