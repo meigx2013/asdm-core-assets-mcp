@@ -24,13 +24,16 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install CodeBuddy
+        run: |
+          npm install -g @tencent-ai/codebuddy-code
+          codebuddy --version
+
       - name: Execute task with CodeBuddy
         env:
           CODEBUDDY_API_KEY: ${{ secrets.CODEBUDDY_API_KEY }}
           CODEBUDDY_INTERNET_ENVIRONMENT: ${{ secrets.CODEBUDDY_INTERNET_ENVIRONMENT }}
         run: |
-          npm install -g @tencent-ai/codebuddy-code
-          codebuddy --version
           codebuddy -p "${{ inputs.prompt-text }}" -y --verbose --output-format stream-json
 
       - name: Collect results
