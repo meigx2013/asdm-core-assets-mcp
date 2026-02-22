@@ -43,21 +43,57 @@ jobs:
           npm install -g @tencent-ai/codebuddy-code
           codebuddy --version
 
+      - name: Build Log Parser
+        run: |
+          cd tools/codebuddy-log-parser
+          npm install
+          npm run build
+
       - name: Execute task with CodeBuddy
         env:
           CODEBUDDY_API_KEY: ${{ secrets.CODEBUDDY_API_KEY }}
           CODEBUDDY_INTERNET_ENVIRONMENT: ${{ secrets.CODEBUDDY_INTERNET_ENVIRONMENT }}
         run: |
-          ARGS="-p \"${{ inputs.prompt-text }}\" -y"
+          LOG_FILE="${{ github.workspace }}/execution.log"
+          PARSER="${{ github.workspace }}/tools/codebuddy-log-parser/dist/index.js"
+          
+          ARGS="-p \"${{ inputs.prompt-text }}\" -y --output-format stream-json"
           if [ "${{ inputs.verbose }}" = "true" ]; then
             ARGS="$ARGS --verbose"
           fi
-          if [ -n "${{ inputs.output-format }}" ]; then
-            ARGS="$ARGS --output-format ${{ inputs.output-format }}"
-          fi
-          eval "codebuddy $ARGS"
+          
+          echo "=== CodeBuddy Execution Log (human-chat format) ==="
+          echo ""
+          
+          # Run codebuddy with stream-json, save to file and parse in real-time
+          eval "codebuddy $ARGS" 2>&1 | tee "$LOG_FILE" | while IFS= read -r line; do
+            # Only process lines that start with timestamp (JSON log format)
+            if [[ "$line" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}T ]]; then
+              echo "$line" | node "$PARSER" -f human-chat --no-color 2>/dev/null || true
+            fi
+          done
 
-      - name: Collect results
+      - name: Parse final log
         if: always()
         run: |
-          echo "Collecting execution results..."
+          LOG_FILE="${{ github.workspace }}/execution.log"
+          PARSER="${{ github.workspace }}/tools/codebuddy-log-parser/dist/index.js"
+          
+          if [ -f "$LOG_FILE" ]; then
+            echo ""
+            echo "=== Final Parsed Log ==="
+            node "$PARSER" -f human-chat --no-color "$LOG_FILE" 2>/dev/null || echo "Log file exists but parser failed"
+            
+            # Also generate JSON output for artifacts
+            node "$PARSER" -f json "$LOG_FILE" > "${{ github.workspace }}/execution-parsed.json" 2>/dev/null || true
+          fi
+
+      - name: Upload log artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: execution-logs
+          path: |
+            execution.log
+            execution-parsed.json
+          retention-days: 7
