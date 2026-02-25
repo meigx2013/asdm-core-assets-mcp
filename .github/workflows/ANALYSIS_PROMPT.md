@@ -2,6 +2,7 @@ Please analyze this repository and generate comprehensive context space informat
 
 IMPORTANT: You must write the analysis results directly to markdown files in the following directory:
 {RESULT_DIR}
+this directory is already created for you, just use it, no need to create a new one.
 
 Please create the following markdown files in that directory:
 - project-overview.md - Project structure overview, purpose, and key features
