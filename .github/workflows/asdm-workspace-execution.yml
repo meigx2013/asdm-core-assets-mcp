@@ -167,6 +167,8 @@ jobs:
           GH_TOKEN: ${{ github.event.inputs.workspace-git-token }}
         working-directory: ${{ github.workspace }}/workspace
         run: |
+          PR_JSON_FILE="${{ github.workspace }}/pr.json"
+
           # Ensure credential helper is configured for push
           if [ -n "$WORKSPACE_GIT_TOKEN" ]; then
             GIT_HOST=$(git remote get-url origin | sed -E 's|.*@([^:/]+).*|\1|' | head -1)
@@ -177,6 +179,7 @@ jobs:
           # Check if there are any changes (including untracked files)
           if [ -z "$(git status --porcelain)" ]; then
             echo "No changes detected. Skipping commit and PR creation."
+            echo '{"status": "no_changes", "message": "No changes detected. PR not created."}' > "$PR_JSON_FILE"
             exit 0
           fi
 
@@ -194,15 +197,35 @@ jobs:
           # Push changes to target branch
           git push origin "$WORKSPACE_GIT_BRANCH_TARGET"
 
-          # Create Pull Request using GitHub CLI
-          gh pr create \
+          # Create Pull Request using GitHub CLI and capture JSON output
+          PR_RESULT=$(gh pr create \
             --title "Auto-generated: CodeBuddy changes" \
             --body "Automated changes from CodeBuddy workflow execution." \
             --base "$WORKSPACE_GIT_BRANCH" \
             --head "$WORKSPACE_GIT_BRANCH_TARGET" \
-            --draft || echo "PR may already exist or creation failed"
+            --draft \
+            --json number,url,title,state,createdAt,headRefName,baseRefName 2>&1)
+
+          PR_EXIT_CODE=$?
+
+          if [ $PR_EXIT_CODE -eq 0 ]; then
+            echo "PR created successfully"
+            echo "$PR_RESULT" > "$PR_JSON_FILE"
+          else
+            # Check if PR already exists
+            EXISTING_PR=$(gh pr list --head "$WORKSPACE_GIT_BRANCH_TARGET" --json number,url,title,state --jq '.[0]')
+            if [ -n "$EXISTING_PR" ] && [ "$EXISTING_PR" != "null" ]; then
+              echo "PR already exists"
+              echo "{\"status\": \"already_exists\", \"pr\": $EXISTING_PR}" > "$PR_JSON_FILE"
+            else
+              echo "PR creation failed"
+              echo "{\"status\": \"error\", \"message\": $(echo "$PR_RESULT" | jq -Rs .)}" > "$PR_JSON_FILE"
+            fi
+          fi
 
           echo "PR creation process completed"
+          echo "PR info saved to: $PR_JSON_FILE"
+          cat "$PR_JSON_FILE"
 
       - name: Upload log artifacts
         if: always()
@@ -212,4 +235,5 @@ jobs:
           path: |
             execution.log
             execution-parsed.json
+            pr.json
           retention-days: 7
