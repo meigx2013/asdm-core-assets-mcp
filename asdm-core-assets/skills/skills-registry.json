@@ -173,6 +173,50 @@
       "dateUpdated": "2026-03-19T00:00:00Z",
       "createdBy": "ASDM Platform",
       "updatedBy": "ASDM Platform"
+    },
+    {
+      "id": "report-development",
+      "name": "Report Development Generator",
+      "description": "Generate report templates and implementations for various platforms and formats. Supports data tables, charts, PDF exports, Excel exports, and professional report solutions.",
+      "version": "1.0.0",
+      "path": "report-development",
+      "entryPoint": "report-development/SKILL.md",
+      "techStack": {
+        "language": "javascript",
+        "framework": "report",
+        "orm": null
+      },
+      "specs": [],
+      "parameters": {
+        "reportName": {
+          "type": "string",
+          "required": true,
+          "description": "Report name (PascalCase, e.g., SalesReport, UserActivityReport)"
+        },
+        "reportType": {
+          "type": "string",
+          "required": false,
+          "default": "table",
+          "description": "Report type: table, chart, pdf, excel, dashboard"
+        },
+        "framework": {
+          "type": "string",
+          "required": false,
+          "default": "chartjs",
+          "description": "Framework: chartjs, echarts, ag-grid, datatables, itext, poi, jasperreports"
+        },
+        "outputDir": {
+          "type": "string",
+          "required": false,
+          "default": "./reports",
+          "description": "Output directory path"
+        }
+      },
+      "aliases": ["report", "reports", "table", "chart", "pdf", "excel", "dashboard", "chartjs", "echarts", "ag-grid", "datatables"],
+      "dateCreated": "2026-03-20T00:00:00Z",
+      "dateUpdated": "2026-03-20T00:00:00Z",
+      "createdBy": "ASDM Platform",
+      "updatedBy": "ASDM Platform"
     }
   ]
 }

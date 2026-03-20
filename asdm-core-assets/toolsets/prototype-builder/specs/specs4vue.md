@@ -16,21 +16,21 @@ This document specifies the requirements and standards for generating Vue.js-bas
 
 When generating Vue prototypes, the following coding standards from `asdm-core-assets/specs` MUST be followed:
 
-- **[Vue 3 Composition API Specs](../../.asdm/specs/vue3-composition-api/README.md)**: Primary coding standards for Vue 3
-  - [General Guidelines](../../.asdm/specs/vue3-composition-api/vue-3-composition-api-general.md): Core Composition API patterns
-  - [Composables](../../.asdm/specs/vue3-composition-api/vue-3-composition-api-composables.md): Reusable logic patterns
-  - [TypeScript Guidelines](../../.asdm/specs/vue3-composition-api/vue-3-typescript-guidelines.md): Type safety requirements
-  - [Project Structure](../../.asdm/specs/vue3-composition-api/vue-3-project-structure.md): Folder organization
-  - [Accessibility Guidelines](../../.asdm/specs/vue3-composition-api/accessibility-guidelines.md): WCAG compliance
-  - [Performance Optimization](../../.asdm/specs/vue3-composition-api/performance-optimization.md): Performance best practices
+- **[Vue 3 Composition API Specs](.asdm/specs/vue3-composition-api/README.md)**: Primary coding standards for Vue 3
+  - [General Guidelines](.asdm/specs/vue3-composition-api/vue-3-composition-api-general.md): Core Composition API patterns
+  - [Composables](.asdm/specs/vue3-composition-api/vue-3-composition-api-composables.md): Reusable logic patterns
+  - [TypeScript Guidelines](.asdm/specs/vue3-composition-api/vue-3-typescript-guidelines.md): Type safety requirements
+  - [Project Structure](.asdm/specs/vue3-composition-api/vue-3-project-structure.md): Folder organization
+  - [Accessibility Guidelines](.asdm/specs/vue3-composition-api/accessibility-guidelines.md): WCAG compliance
+  - [Performance Optimization](.asdm/specs/vue3-composition-api/performance-optimization.md): Performance best practices
 
-- **[TypeScript Vite Vue Tailwind DaisyUI](../../.asdm/specs/typescript-vite-vue-tailwind-daisyui/README.md)**: For projects using Tailwind CSS
+- **[TypeScript Vite Vue Tailwind DaisyUI](.asdm/specs/typescript-vite-vue-tailwind-daisyui/README.md)**: For projects using Tailwind CSS
 
-- **[JavaScript General](../../.asdm/specs/javascript/javascript.md)**: JavaScript coding conventions
+- **[JavaScript General](.asdm/specs/javascript/javascript.md)**: JavaScript coding conventions
 
-- **[TypeScript](../../.asdm/specs/typescript/typescript.md)**: TypeScript type system
+- **[TypeScript](.asdm/specs/typescript/typescript.md)**: TypeScript type system
 
-- **[CSS](../../.asdm/specs/css/css.md)**: Styling conventions
+- **[CSS](.asdm/specs/css/css.md)**: Styling conventions
 
 ## Required Conventions
 
