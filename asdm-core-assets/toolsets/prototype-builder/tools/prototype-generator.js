@@ -21,47 +21,47 @@ const { execSync } = require('child_process');
 // When generating prototypes, follow these specs from asdm-core-assets/specs
 const STACK_SPECS = {
   react: {
-    primary: 'specs/reactjs/README.md',
+    primary: '.asdm/specs/reactjs/README.md',
     related: [
-      'specs/reactjs/reactjs-coding-standard.md',
-      'specs/reactjs/reactjs-performance-guidelines.md',
-      'specs/reactjs/reactjs-testing-guidelines.md',
-      'specs/javascript/javascript.md',
-      'specs/typescript/typescrit.md',
-      'specs/css/css.md',
+      '.asdm/specs/reactjs/reactjs-coding-standard.md',
+      '.asdm/specs/reactjs/reactjs-performance-guidelines.md',
+      '.asdm/specs/reactjs/reactjs-testing-guidelines.md',
+      '.asdm/specs/javascript/javascript.md',
+      '.asdm/specs/typescript/typescript.md',
+      '.asdm/specs/css/css.md',
     ],
   },
   vue: {
-    primary: 'specs/vue3-composition-api/README.md',
+    primary: '.asdm/specs/vue3-composition-api/README.md',
     related: [
-      'specs/vue3-composition-api/vue-3-composition-api-general.md',
-      'specs/vue3-composition-api/vue-3-composition-api-composables.md',
-      'specs/vue3-composition-api/vue-3-typescript-guidelines.md',
-      'specs/vue3-composition-api/vue-3-project-structure.md',
-      'specs/javascript/javascript.md',
-      'specs/typescript/typescrit.md',
-      'specs/css/css.md',
+      '.asdm/specs/vue3-composition-api/vue-3-composition-api-general.md',
+      '.asdm/specs/vue3-composition-api/vue-3-composition-api-composables.md',
+      '.asdm/specs/vue3-composition-api/vue-3-typescript-guidelines.md',
+      '.asdm/specs/vue3-composition-api/vue-3-project-structure.md',
+      '.asdm/specs/javascript/javascript.md',
+      '.asdm/specs/typescript/typescript.md',
+      '.asdm/specs/css/css.md',
     ],
   },
   html: {
-    primary: 'specs/html/html.md',
+    primary: '.asdm/specs/html/html.md',
     related: [
-      'specs/html/html.md',
-      'specs/css/css.md',
-      'specs/javascript/javascript.md',
+      '.asdm/specs/html/html.md',
+      '.asdm/specs/css/css.md',
+      '.asdm/specs/javascript/javascript.md',
     ],
   },
   miniprogram: {
-    primary: 'specs/weixin-miniprogram/README.md',
+    primary: '.asdm/specs/weixin-miniprogram/README.md',
     related: [
-      'specs/javascript/javascript.md',
+      '.asdm/specs/javascript/javascript.md',
     ],
   },
   nextjs: {
-    primary: 'specs/nextjs-react-tailwind/README.md',
+    primary: '.asdm/specs/nextjs-react-tailwind/README.md',
     related: [
-      'specs/reactjs/reactjs-coding-standard.md',
-      'specs/typescript/typescrit.md',
+      '.asdm/specs/reactjs/reactjs-coding-standard.md',
+      '.asdm/specs/typescript/typescript.md',
     ],
   },
 };

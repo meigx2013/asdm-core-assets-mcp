@@ -82,15 +82,18 @@ The Prototype Builder toolset has the following structure:
 ```
 .asdm/toolsets/prototype-builder/
 ├── INSTALL.md                                  ## Installation instructions
-├── README.md                                   ## Current document
+├── README.md                                   ## English documentation
+├── README.zh.md                               ## Chinese documentation
 ├── actions                                     ## Instructions for Prototype Builder
 │   ├── asdm-prototype-create.md                ## Instruction for creating prototypes
 │   └── asdm-prototype-scaffold.md              ## Instruction for scaffolding projects
-└── specs                                       ## Spec documents for Prototype Builder
-    ├── specs4react.md                          ## React prototype specifications
-    ├── specs4vue.md                            ## Vue prototype specifications
-    ├── specs4html.md                           ## HTML prototype specifications
-    └── specs4miniprogram.md                   ## Mini Program specifications
+├── specs                                       ## Spec documents for Prototype Builder
+│   ├── specs4react.md                          ## React prototype specifications
+│   ├── specs4vue.md                            ## Vue prototype specifications
+│   ├── specs4html.md                           ## HTML prototype specifications
+│   └── specs4miniprogram.md                   ## Mini Program specifications
+└── tools                                       ## Generator tools
+    └── prototype-generator.js                  ## Core prototype generation tool
 ```
 
 ## Usage Examples
@@ -117,7 +120,7 @@ Primary spec: specs/reactjs/README.md
 Related specs:
   - specs/reactjs/reactjs-coding-standard.md
   - specs/javascript/javascript.md
-  - specs/typescript/typescrit.md
+  - specs/typescript/typescript.md
   - specs/css/css.md
 
 IMPORTANT: Follow these coding standards when implementing the prototype.

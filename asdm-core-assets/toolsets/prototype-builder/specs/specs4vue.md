@@ -28,7 +28,7 @@ When generating Vue prototypes, the following coding standards from `asdm-core-a
 
 - **[JavaScript General](../../.asdm/specs/javascript/javascript.md)**: JavaScript coding conventions
 
-- **[TypeScript](../../.asdm/specs/typescript/typescrit.md)**: TypeScript type system
+- **[TypeScript](../../.asdm/specs/typescript/typescript.md)**: TypeScript type system
 
 - **[CSS](../../.asdm/specs/css/css.md)**: Styling conventions
 

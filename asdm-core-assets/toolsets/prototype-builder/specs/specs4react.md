@@ -28,7 +28,7 @@ When generating React prototypes, the following coding standards from `asdm-core
   - Strict equality (`===`/`!==`)
   - `const`/`let` only, no `var`
 
-- **[TypeScript](../../.asdm/specs/typescript/typescrit.md)**: TypeScript type system (if using TypeScript)
+- **[TypeScript](../../.asdm/specs/typescript/typescript.md)**: TypeScript type system (if using TypeScript)
 
 - **[CSS](../../.asdm/specs/css/css.md)**: Styling conventions
 

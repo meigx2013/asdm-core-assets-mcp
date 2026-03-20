@@ -1,0 +1,178 @@
+{
+  "version": "1.0.1",
+  "dateCreated": "2026-03-19T00:00:00Z",
+  "dateUpdated": "2026-03-19T00:00:00Z",
+  "createdBy": "ASDM Platform",
+  "updatedBy": "ASDM Platform",
+  "skills": [
+    {
+      "id": "java-springboot-crud",
+      "name": "Java Spring Boot CRUD Generator",
+      "description": "Generate Java Spring Boot CRUD operations with Spring Data JPA. Includes Entity, Repository, Service, Controller, DTO, and Mapper templates.",
+      "version": "1.0.0",
+      "path": "java-springboot-crud",
+      "entryPoint": "java-springboot-crud/SKILL.md",
+      "techStack": {
+        "language": "java",
+        "framework": "spring-boot",
+        "orm": "jpa"
+      },
+      "specs": [
+        "java-general",
+        "java-springboot-jpa"
+      ],
+      "parameters": {
+        "entity": {
+          "type": "string",
+          "required": true,
+          "description": "Entity name (PascalCase, e.g., User, Product)"
+        },
+        "outputDir": {
+          "type": "string",
+          "required": false,
+          "default": "./src/main/java/com/example",
+          "description": "Output directory path"
+        }
+      },
+      "aliases": ["java", "java-springboot", "springboot"],
+      "dateCreated": "2026-03-19T00:00:00Z",
+      "dateUpdated": "2026-03-19T00:00:00Z",
+      "createdBy": "ASDM Platform",
+      "updatedBy": "ASDM Platform"
+    },
+    {
+      "id": "dotnet-crud",
+      "name": ".NET CRUD Generator",
+      "description": "Generate .NET CRUD operations using Entity Framework Core with ASP.NET Core. Includes Models, DTOs, Services, Controllers, and DbContext templates.",
+      "version": "1.0.0",
+      "path": "dotnet-crud",
+      "entryPoint": "dotnet-crud/SKILL.md",
+      "techStack": {
+        "language": "csharp",
+        "framework": "aspnet-core",
+        "orm": "entity-framework"
+      },
+      "specs": [],
+      "parameters": {
+        "entity": {
+          "type": "string",
+          "required": true,
+          "description": "Entity name (PascalCase, e.g., User, Product)"
+        },
+        "outputDir": {
+          "type": "string",
+          "required": false,
+          "default": "./src",
+          "description": "Output directory path"
+        }
+      },
+      "aliases": ["dotnet", "csharp", "net", ".net"],
+      "dateCreated": "2026-03-19T00:00:00Z",
+      "dateUpdated": "2026-03-19T00:00:00Z",
+      "createdBy": "ASDM Platform",
+      "updatedBy": "ASDM Platform"
+    },
+    {
+      "id": "go-crud",
+      "name": "Go CRUD Generator",
+      "description": "Generate Go CRUD operations using Gin framework and GORM. Includes Models, DTOs, Repository, Service, and Handler templates.",
+      "version": "1.0.0",
+      "path": "go-crud",
+      "entryPoint": "go-crud/SKILL.md",
+      "techStack": {
+        "language": "go",
+        "framework": "gin",
+        "orm": "gorm"
+      },
+      "specs": [],
+      "parameters": {
+        "entity": {
+          "type": "string",
+          "required": true,
+          "description": "Entity name (PascalCase, e.g., User, Product)"
+        },
+        "outputDir": {
+          "type": "string",
+          "required": false,
+          "default": "./internal",
+          "description": "Output directory path"
+        }
+      },
+      "aliases": ["go", "golang"],
+      "dateCreated": "2026-03-19T00:00:00Z",
+      "dateUpdated": "2026-03-19T00:00:00Z",
+      "createdBy": "ASDM Platform",
+      "updatedBy": "ASDM Platform"
+    },
+    {
+      "id": "python-fastapi-crud",
+      "name": "Python FastAPI CRUD Generator",
+      "description": "Generate Python CRUD operations using FastAPI and SQLAlchemy. Includes Models, Schemas, CRUD operations, and API Router templates.",
+      "version": "1.0.0",
+      "path": "python-fastapi-crud",
+      "entryPoint": "python-fastapi-crud/SKILL.md",
+      "techStack": {
+        "language": "python",
+        "framework": "fastapi",
+        "orm": "sqlalchemy"
+      },
+      "specs": [],
+      "parameters": {
+        "entity": {
+          "type": "string",
+          "required": true,
+          "description": "Entity name (lowercase, e.g., user, product)"
+        },
+        "outputDir": {
+          "type": "string",
+          "required": false,
+          "default": "./src",
+          "description": "Output directory path"
+        }
+      },
+      "aliases": ["python", "fastapi", "python-fastapi"],
+      "dateCreated": "2026-03-19T00:00:00Z",
+      "dateUpdated": "2026-03-19T00:00:00Z",
+      "createdBy": "ASDM Platform",
+      "updatedBy": "ASDM Platform"
+    },
+    {
+      "id": "sql-ddl",
+      "name": "SQL DDL Generator",
+      "description": "Generate SQL DDL scripts for various database systems. Supports PostgreSQL, MySQL, SQLite, and SQL Server with proper constraints, indexes, and naming conventions.",
+      "version": "1.0.0",
+      "path": "sql-ddl",
+      "entryPoint": "sql-ddl/SKILL.md",
+      "techStack": {
+        "language": "sql",
+        "framework": "ddl",
+        "orm": null
+      },
+      "specs": [],
+      "parameters": {
+        "entity": {
+          "type": "string",
+          "required": true,
+          "description": "Entity name (PascalCase, e.g., User, Product)"
+        },
+        "databaseType": {
+          "type": "string",
+          "required": false,
+          "default": "postgresql",
+          "description": "Database type: postgresql, mysql, sqlite, mssql"
+        },
+        "outputDir": {
+          "type": "string",
+          "required": false,
+          "default": "./sql",
+          "description": "Output directory path"
+        }
+      },
+      "aliases": ["sql", "ddl", "postgresql", "mysql", "sqlite", "mssql"],
+      "dateCreated": "2026-03-19T00:00:00Z",
+      "dateUpdated": "2026-03-19T00:00:00Z",
+      "createdBy": "ASDM Platform",
+      "updatedBy": "ASDM Platform"
+    }
+  ]
+}
