@@ -16,10 +16,12 @@ README.md                     # ASDM核心存储库 总说明文件，当前文�
 │       ├── asdm-workspace-init-pipeline.yml  # ASDM 工作区初始化workflow
 │       ├── asdm-workspace-execution.yml      # ASDM 工作区任务执行通用workflow
 │       ├── asdm-context-space-sync.yml       # 用于同步上下文注册表的workflow
-│       ├── toolsets-package.yml              # 工具包打包workflow
-│       ├── specs-package.yml                 # 规约打包workflow
-│       ├── skill-package.yml                 # 技能打包workflow
-│       └── mcp-package.yml                   # MCP打包workflow
+│       ├── skill-package.yml                 # Skills 自动打包workflow
+│       ├── specs-package.yml                 # Specs 自动打包workflow
+│       ├── toolsets-package.yml              # Toolsets 自动打包workflow
+│       ├── ANALYSIS_PROMPT.md                # 仓库分析提示文档
+│       ├── ANALYSIS_PROMPT_SpringBoot_API.md # Spring Boot API 分析提示文档
+│       └── api.md                            # API 文档模板
 asdm-core-assets/
 │   ├── README.md             # ASDM资产说明文件
 │   ├── toolsets/             # 工具包目录
