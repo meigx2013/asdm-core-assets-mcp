@@ -18,9 +18,7 @@ mcps/
 ├── mcps-registry.json    # Registry file for Admin UI
 └── {mcp-server-id}/      # Individual MCP server package
     ├── README.md         # Server overview and documentation
-    ├── INSTALL.md        # Installation and configuration guide
-    ├── config.json       # Default configuration template
-    └── tools/            # Additional tools or resources (optional)
+    └── config.json       # Default configuration template
 ```
 
 ## Available MCP Servers
@@ -40,7 +38,6 @@ To add a new MCP server:
 2. Or manually:
    - Create a new directory under `mcps/` with a unique ID
    - Add `README.md` with server overview
-   - Add `INSTALL.md` with installation instructions
    - Add `config.json` with default configuration
    - Update `mcps-registry.json` with new entry
 
@@ -50,9 +47,7 @@ To add a new MCP server:
 mcps/
 └── {mcp-server-id}/
     ├── README.md         # Overview, features, usage
-    ├── INSTALL.md        # Installation steps for different transports
-    ├── config.json       # Tool definitions and default config
-    └── tools/            # Optional: additional scripts or resources
+    └── config.json       # Tool definitions and default config
 ```
 
 ## MCP Server Categories
@@ -126,9 +121,8 @@ MCP servers integrate with:
 
 1. Browse available servers in `mcps-registry.json`
 2. Read the server's `README.md` for capabilities
-3. Follow `INSTALL.md` for setup instructions
-4. Configure using `config.json` template
-5. Integrate with your AI coding assistant
+3. Configure using `config.json` template
+4. Integrate with your AI coding assistant
 
 ## Contributing
 

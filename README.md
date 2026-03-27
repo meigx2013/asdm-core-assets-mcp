@@ -61,7 +61,6 @@ asdm-core-assets/
 │   │   ├── mcps-registry.json      # MCP注册表文件
 │   │   └── {mcp-server-id}/        # MCP服务器包
 │   │       ├── README.md           # 服务器概述文档
-│   │       ├── INSTALL.md          # 安装配置指南
 │   │       └── config.json         # 默认配置模板
 │   └── contexts/              # 上下文存储
 │       ├── contexts-registry.json
@@ -105,7 +104,6 @@ Available skills:
 MCP (Model Context Protocol) servers provide external tool integrations and data source connectors. Each MCP server includes:
 
 - **README.md**: Server overview and capabilities
-- **INSTALL.md**: Installation and configuration instructions
 - **config.json**: Default configuration template with tool definitions
 
 Available MCP servers are tracked in `mcps-registry.json`.
