@@ -1,0 +1,6 @@
+
+⚠ 未登录 ASDM 平台
+请通过以下方式登录:
+  asdm login          - 浏览器登录
+  asdm login --pat  - PAT 令牌登录
+
