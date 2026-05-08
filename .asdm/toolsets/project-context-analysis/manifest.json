@@ -1,0 +1,14 @@
+{
+  "registry_id": "project-context-analysis",
+  "name": "项目上下文分析工具集",
+  "description": "基于模块化架构的上下文分析工具,专为大型复杂项目设计,通过模块化方式生成完整且可追溯的项目上下文。",
+  "version": "0.2.0",
+  "downloadUrl": "code-analyzer.zip",
+  "entryPoint": "code-analyzer/README.md",
+  "dateCreated": "2026-04-18T00:00:00Z",
+  "dateUpdated": "2026-04-18T00:00:00Z",
+  "createdBy": "ASDM Platform",
+  "updatedBy": "ASDM Platform",
+  "configType": "toolset",
+  "commands": {"/asdm-cpc-index-init":"init", "/asdm-cpc-build-module-context-index":"索引", "/asdm-cpc-all-module-context-build":"模块构建", "/asdm-cpc-workspace-context-build":"工作空间构建"}
+}
